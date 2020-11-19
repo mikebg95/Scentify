@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -24,9 +25,11 @@ public class QuestionActivity extends AppCompatActivity {
 
     // UI views & buttons
     TextView questionText;
-    Button nextQuestion;
+    Button nextQuestion, previousQuestion;
     RadioButton answer1, answer2, answer3, answer4, answer5, answer6;
     RadioGroup options;
+    ProgressBar progress;
+    TextView progressText;
 
     // keep track of questions
     int qNum;
@@ -53,7 +56,10 @@ public class QuestionActivity extends AppCompatActivity {
         answer5 = findViewById(R.id.answer5);
         answer6 = findViewById(R.id.answer6);
         nextQuestion = findViewById(R.id.next_question);
+        previousQuestion = findViewById(R.id.previous_question);
         options = findViewById(R.id.options);
+        progress = findViewById(R.id.progress);
+        progressText = findViewById(R.id.progress_text);
 
         // start with first question
         lastQuestion = false;
@@ -61,34 +67,49 @@ public class QuestionActivity extends AppCompatActivity {
 
         bindViews(qNum); // bind views to question and answer options
 
+
+        // when previous question clicked, delete last answer and go back
+        previousQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                answers.remove(answers.get(answers.size() - 1));
+                lastQuestion = false;
+                nextQuestion.setText("Next");
+                qNum--;
+                bindViews(qNum);
+            }
+        });
+
         // when clicked on "next"
         nextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // get clicked answer
-                getClickedAnswer();
+                boolean clicked = getClickedAnswer();
 
-                // if not last question, bind views for next question
-                if (!lastQuestion) {
-                    qNum++;
-                    bindViews(qNum);
-                }
+                if (clicked) {
+                    // if not last question, bind views for next question
+                    if (!lastQuestion) {
+                        qNum++;
+                        bindViews(qNum);
+                    }
 
-                // if last question, go to result activity
-                else {
-                    Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-                    intent.putExtra("answers", answers);
-                    startActivity(intent);
-
+                    // if last question, go to result activity
+                    else {
+                        Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                        intent.putExtra("answers", answers);
+                        startActivity(intent);
+                    }
                 }
             }
         });
     }
 
-    public void getClickedAnswer() {
+    public boolean getClickedAnswer() {
         // when no option has been chosen
         if (options.getCheckedRadioButtonId() == -1) {
             makeToast("Please select an answer");
+            return false;
         }
         else {
             // get subject of question
@@ -105,6 +126,7 @@ public class QuestionActivity extends AppCompatActivity {
 //            for (int i = 0; i < answers.size(); i++) {
 //                makeToast(answers.get(i));
 //            }
+            return true;
         }
     }
 
@@ -118,6 +140,9 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     public void bindViews(int qNum) {
+        // set progress bar
+        setProgressBar(qNum);
+
         // make all radio buttons visible (again)
         answer1.setVisibility(View.VISIBLE);
         answer2.setVisibility(View.VISIBLE);
@@ -125,6 +150,25 @@ public class QuestionActivity extends AppCompatActivity {
         answer4.setVisibility(View.VISIBLE);
         answer5.setVisibility(View.VISIBLE);
         answer6.setVisibility(View.VISIBLE);
+
+//        // make all radio buttons unchecked
+//        answer1.setChecked(false);
+//        answer2.setChecked(false);
+//        answer3.setChecked(false);
+//        answer4.setChecked(false);
+//        answer5.setChecked(false);
+//        answer6.setChecked(false);
+        // uncheck radio buttons
+        options.clearCheck();
+
+
+
+        if (qNum == 0) {
+            previousQuestion.setVisibility(View.INVISIBLE);
+        }
+        else {
+            previousQuestion.setVisibility(View.VISIBLE);
+        }
 
         // on last question, change "next" to "submit"
         if (qNum == questions.size() - 1) {
@@ -186,6 +230,17 @@ public class QuestionActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void setProgressBar(int qNum) {
+        // set progress bar text
+        int totalQ = questions.size();
+        int currentQ = qNum + 1;
+        progressText.setText(currentQ + "/" + totalQ);
+
+        // set progress bar animation (ppq = progress per question)
+        int ppq = 100 / totalQ;
+        progress.setProgress(ppq * currentQ);
     }
 
     public void makeToast(String message) {
