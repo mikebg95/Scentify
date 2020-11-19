@@ -101,7 +101,6 @@ public class QuestionActivity extends AppCompatActivity {
             String answer = answerOption.getText().toString();
 
             answers.put(questionSubject, answer);
-            makeToast(questionSubject + ", " + answer);
 
 //            for (int i = 0; i < answers.size(); i++) {
 //                makeToast(answers.get(i));

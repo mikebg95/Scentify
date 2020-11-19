@@ -5,6 +5,7 @@ import androidx.core.content.res.TypedArrayUtils;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Range;
@@ -26,7 +27,7 @@ public class ResultActivity extends AppCompatActivity {
     private final static String TAG = "GAMEPLAY";
 
     ArrayList<Perfume> perfumes;
-    ArrayList<Perfume> resultPerfumes;
+    public static ArrayList<Perfume> resultPerfumes;
     ArrayList<String> perfumeNames;
     ArrayAdapter<String> adapter;
     ListView lv;
@@ -62,13 +63,11 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String nameClicked = (String) parent.getItemAtPosition(position);
-                Perfume perfumeClicked = null;
-                for (int i = 0; i < resultPerfumes.size(); i++) {
-                    if (resultPerfumes.get(i).getName().equals(nameClicked)) {
-                        perfumeClicked = resultPerfumes.get(i);
-                    }
-                }
+
                 // TODO: pass clicked perfume object via intent to PerfumeActivity!
+                Intent intent = new Intent(getApplicationContext(), PerfumeActivity.class);
+                intent.putExtra("nameClicked", nameClicked);
+                startActivity(intent);
 
             }
         });
@@ -137,6 +136,7 @@ public class ResultActivity extends AppCompatActivity {
         Perfume p8 = new Perfume("Mont Blanc Legend Spirit", new String[]{"spring", "summer"}, new Range(35, 120));
         Perfume p9 = new Perfume("Lacoste Blanc", new String[]{"spring", "summer"}, new Range(35, 120));
         Perfume p10 = new Perfume("Versace Pour Homme", new String[]{"spring", "summer"}, new Range(0, 34));
+        Perfume p11 = new Perfume("Anyone, Anytime & Anywhere", new String[]{"spring", "summer", "fall", "winter"}, new Range(0, 120));
 
         perfumes.add(p1);
         perfumes.add(p2);
@@ -148,6 +148,7 @@ public class ResultActivity extends AppCompatActivity {
         perfumes.add(p8);
         perfumes.add(p9);
         perfumes.add(p10);
+        perfumes.add(p11);
     }
 
     public void makeToast(String message) {
