@@ -2,9 +2,10 @@ package com.example.perfumefinder;
 
 import android.util.Range;
 
+import java.io.Serializable;
 import java.util.stream.IntStream;
 
-public class Perfume {
+public class Perfume implements Serializable {
     private String name;
     private String[] seasons;
     private Range ageRange;

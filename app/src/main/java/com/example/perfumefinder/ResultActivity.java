@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.TypedArrayUtils;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Range;
@@ -40,7 +41,7 @@ public class ResultActivity extends AppCompatActivity {
         perfumes = new ArrayList<>();
         resultPerfumes = new ArrayList<>();
         perfumeNames = new ArrayList<>();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, perfumeNames);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, perfumeNames);
         lv = findViewById(R.id.lv);
 
         addPerfumes();
@@ -57,7 +58,20 @@ public class ResultActivity extends AppCompatActivity {
 
         lv.setAdapter(adapter);
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String nameClicked = (String) parent.getItemAtPosition(position);
+                Perfume perfumeClicked = null;
+                for (int i = 0; i < resultPerfumes.size(); i++) {
+                    if (resultPerfumes.get(i).getName().equals(nameClicked)) {
+                        perfumeClicked = resultPerfumes.get(i);
+                    }
+                }
+                // TODO: pass clicked perfume object via intent to PerfumeActivity!
 
+            }
+        });
 
 
     }
