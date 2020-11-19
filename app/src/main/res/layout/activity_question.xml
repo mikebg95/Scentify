@@ -57,6 +57,12 @@
             android:layout_height="wrap_content"
             android:text="Answer 5" />
 
+        <RadioButton
+            android:id="@+id/answer6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Answer 6" />
+
     </RadioGroup>
 
     <Button
@@ -67,6 +73,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/options" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

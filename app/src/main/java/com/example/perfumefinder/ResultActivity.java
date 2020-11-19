@@ -1,18 +1,24 @@
 package com.example.perfumefinder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.TypedArrayUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Range;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -24,7 +30,7 @@ public class ResultActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ListView lv;
 
-    Hashtable<String, String> answers;
+    HashMap<String, String> answers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +47,9 @@ public class ResultActivity extends AppCompatActivity {
 
         // TODO: get answers hashtable from intent! (via JSON??)
         Intent intent = getIntent();
-//        answers = intent.
+        answers = (HashMap<String, String>) intent.getSerializableExtra("answers");
 
-//        checkPerfumes(answers);
+        checkPerfumes(answers);
 
         for (int i = 0; i < resultPerfumes.size(); i++) {
             perfumeNames.add(resultPerfumes.get(i).getName());
@@ -52,29 +58,55 @@ public class ResultActivity extends AppCompatActivity {
         lv.setAdapter(adapter);
 
 
+
+
     }
 
-    public void checkPerfumes(ArrayList<String> answers) {
+    public void checkPerfumes(HashMap<String, String> answers) {
+        boolean isSeason;
+        boolean isAge;
 
-        String season = answers.get(0);
-        String ageString = answers.get(1);
+        // check season
+        String season = answers.get("season").toLowerCase();
+
+        String ageString = answers.get("age").toLowerCase();
+
         int age;
-        makeToast(ageString);
         if (ageString.equals("0-35 years old")) {
             age = 10;
         }
-        else {
+        else if (ageString.equals("35+ years old")) {
             age = 80;
+        }
+        else {
+            age = 999;
         }
 
         for (int i = 0; i < perfumes.size(); i++) {
-            boolean isInSeasons;
             Perfume perfume = perfumes.get(i);
-            String[] seasons = perfume.getSeasons();
+
+            String[] perfumeSeasons = perfume.getSeasons();
+
             Range ageRange = perfume.getAgeRange();
 
+            if (Arrays.asList(perfumeSeasons).contains(season) || season.equals("doesn't matter") || (season.equals("all seasons") && perfumeSeasons.length == 4)) {
+                isSeason = true;
+            }
+            else {
+                isSeason = false;
+            }
 
-            if (Arrays.asList(seasons).contains(season) && ageRange.contains(age)) {
+            if (ageRange.contains(age) || ageString.equals("doesn't matter")) {
+                isAge = true;
+            }
+            else if (ageRange.toString().equals("[0, 120]") && ageString.equals("all ages")) {
+                isAge = true;
+            }
+            else {
+                isAge = false;
+            }
+
+            if (isSeason && isAge) {
                 resultPerfumes.add(perfume);
             }
         }
