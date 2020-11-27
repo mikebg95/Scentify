@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,10 +26,9 @@ public class QuestionActivity extends AppCompatActivity {
 
     // UI views & buttons
     TextView questionText;
-    Button nextQuestion, previousQuestion;
+    ImageView nextQuestion, previousQuestion, backHome;
     RadioButton answer1, answer2, answer3, answer4, answer5, answer6;
     RadioGroup options;
-    ProgressBar progress;
     TextView progressText;
 
     // keep track of questions
@@ -57,8 +57,8 @@ public class QuestionActivity extends AppCompatActivity {
         answer6 = findViewById(R.id.answer6);
         nextQuestion = findViewById(R.id.next_question);
         previousQuestion = findViewById(R.id.previous_question);
+        backHome = findViewById(R.id.back_home);
         options = findViewById(R.id.options);
-        progress = findViewById(R.id.progress);
         progressText = findViewById(R.id.progress_text);
 
         // start with first question
@@ -67,6 +67,77 @@ public class QuestionActivity extends AppCompatActivity {
 
         bindViews(qNum); // bind views to question and answer options
 
+        backHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
+
+        // change clicked button
+//        options.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                answer1.setBackgroundResource(R.drawable.answer_btn);
+//                answer2.setBackgroundResource(R.drawable.answer_btn);
+//                answer3.setBackgroundResource(R.drawable.answer_btn);
+//                answer4.setBackgroundResource(R.drawable.answer_btn);
+//                answer5.setBackgroundResource(R.drawable.answer_btn);
+//                answer6.setBackgroundResource(R.drawable.answer_btn);
+//
+//                RadioButton buttonClicked = findViewById(checkedId);
+//                buttonClicked.setBackgroundResource(R.drawable.answer_btn_clicked);
+//            }
+//
+//        });
+
+        answer1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearChecks();
+                answer1.setBackgroundResource(R.drawable.btn_clicked);
+            }
+        });
+
+        answer2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearChecks();
+                answer2.setBackgroundResource(R.drawable.btn_clicked);
+            }
+        });
+
+        answer3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearChecks();
+                answer3.setBackgroundResource(R.drawable.btn_clicked);
+            }
+        });
+
+        answer4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearChecks();
+                answer4.setBackgroundResource(R.drawable.btn_clicked);
+            }
+        });
+
+        answer5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearChecks();
+                answer5.setBackgroundResource(R.drawable.btn_clicked);
+            }
+        });
+
+        answer6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearChecks();
+                answer6.setBackgroundResource(R.drawable.btn_clicked);
+            }
+        });
 
         // when previous question clicked, delete last answer and go back
         previousQuestion.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +145,6 @@ public class QuestionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 answers.remove(answers.get(answers.size() - 1));
                 lastQuestion = false;
-                nextQuestion.setText("Next");
                 qNum--;
                 bindViews(qNum);
             }
@@ -151,15 +221,16 @@ public class QuestionActivity extends AppCompatActivity {
         answer5.setVisibility(View.VISIBLE);
         answer6.setVisibility(View.VISIBLE);
 
-//        // make all radio buttons unchecked
-//        answer1.setChecked(false);
-//        answer2.setChecked(false);
-//        answer3.setChecked(false);
-//        answer4.setChecked(false);
-//        answer5.setChecked(false);
-//        answer6.setChecked(false);
         // uncheck radio buttons
         options.clearCheck();
+
+        answer1.setBackgroundResource(R.drawable.btn_unclicked);
+        answer2.setBackgroundResource(R.drawable.btn_unclicked);
+        answer3.setBackgroundResource(R.drawable.btn_unclicked);
+        answer4.setBackgroundResource(R.drawable.btn_unclicked);
+        answer5.setBackgroundResource(R.drawable.btn_unclicked);
+        answer6.setBackgroundResource(R.drawable.btn_unclicked);
+
 
 
 
@@ -172,7 +243,6 @@ public class QuestionActivity extends AppCompatActivity {
 
         // on last question, change "next" to "submit"
         if (qNum == questions.size() - 1) {
-            nextQuestion.setText("Submit");
             lastQuestion = true;
         }
 
@@ -237,13 +307,18 @@ public class QuestionActivity extends AppCompatActivity {
         int totalQ = questions.size();
         int currentQ = qNum + 1;
         progressText.setText(currentQ + "/" + totalQ);
-
-        // set progress bar animation (ppq = progress per question)
-        int ppq = 100 / totalQ;
-        progress.setProgress(ppq * currentQ);
     }
 
     public void makeToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void clearChecks() {
+        answer1.setBackgroundResource(R.drawable.btn_unclicked);
+        answer2.setBackgroundResource(R.drawable.btn_unclicked);
+        answer3.setBackgroundResource(R.drawable.btn_unclicked);
+        answer4.setBackgroundResource(R.drawable.btn_unclicked);
+        answer5.setBackgroundResource(R.drawable.btn_unclicked);
+        answer6.setBackgroundResource(R.drawable.btn_unclicked);
     }
 }

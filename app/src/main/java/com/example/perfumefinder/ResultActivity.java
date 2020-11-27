@@ -12,6 +12,7 @@ import android.util.Range;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class ResultActivity extends AppCompatActivity {
     ArrayList<String> perfumeNames;
     ArrayAdapter<String> adapter;
     ListView lv;
+    ImageView backHome;
 
     HashMap<String, String> answers;
 
@@ -44,10 +46,17 @@ public class ResultActivity extends AppCompatActivity {
         perfumeNames = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, perfumeNames);
         lv = findViewById(R.id.lv);
+        backHome = findViewById(R.id.back_home2);
 
         addPerfumes();
 
-        // TODO: get answers hashtable from intent! (via JSON??)
+        backHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), QuestionActivity.class));
+            }
+        });
+
         Intent intent = getIntent();
         answers = (HashMap<String, String>) intent.getSerializableExtra("answers");
 
@@ -57,6 +66,7 @@ public class ResultActivity extends AppCompatActivity {
             perfumeNames.add(resultPerfumes.get(i).getName());
         }
 
+        // TODO: make custom lv rows with image and name
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -64,7 +74,6 @@ public class ResultActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String nameClicked = (String) parent.getItemAtPosition(position);
 
-                // TODO: pass clicked perfume object via intent to PerfumeActivity!
                 Intent intent = new Intent(getApplicationContext(), PerfumeActivity.class);
                 intent.putExtra("nameClicked", nameClicked);
                 startActivity(intent);
@@ -126,17 +135,17 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     public void addPerfumes() {
-        Perfume p1 = new Perfume("Viktor & Rolf Spicebomb Extreme", new String[]{"fall", "winter"}, new Range(35, 120));
-        Perfume p2 = new Perfume("Dolce & Gabbana The One EDP", new String[]{"fall", "winter"}, new Range(35, 120));
-        Perfume p3 = new Perfume("Calvin Klein CK Shock For Him", new String[]{"fall", "winter"}, new Range(0, 34));
-        Perfume p4 = new Perfume("Emporio Armani Stronger With You", new String[]{"fall", "winter"}, new Range(0, 34));
-        Perfume p5 = new Perfume("Azzaro Wanted By Night", new String[]{"fall", "winter"}, new Range(35, 120));
-        Perfume p6 = new Perfume("Dolce & Gabbana Light Blue Intense", new String[]{"spring", "summer"}, new Range(0, 34));
-        Perfume p7 = new Perfume("Bvlgari Aqva Marine Pour Homme", new String[]{"spring", "summer"}, new Range(35, 120));
-        Perfume p8 = new Perfume("Mont Blanc Legend Spirit", new String[]{"spring", "summer"}, new Range(35, 120));
-        Perfume p9 = new Perfume("Lacoste Blanc", new String[]{"spring", "summer"}, new Range(35, 120));
-        Perfume p10 = new Perfume("Versace Pour Homme", new String[]{"spring", "summer"}, new Range(0, 34));
-        Perfume p11 = new Perfume("Anyone, Anytime & Anywhere", new String[]{"spring", "summer", "fall", "winter"}, new Range(0, 120));
+        Perfume p1 = new Perfume("Viktor & Rolf Spicebomb Extreme", new String[]{"fall", "winter"}, new Range(35, 120), R.drawable.viktor_rolf_spicebomb_extreme);
+        Perfume p2 = new Perfume("Dolce & Gabbana The One EDP", new String[]{"fall", "winter"}, new Range(35, 120), R.drawable.dolce_gabbana_the_one_edp);
+        Perfume p3 = new Perfume("Calvin Klein CK Shock For Him", new String[]{"fall", "winter"}, new Range(0, 34), R.drawable.calvin_klein_ck_shock_for_him);
+        Perfume p4 = new Perfume("Emporio Armani Stronger With You", new String[]{"fall", "winter"}, new Range(0, 34), R.drawable.emporio_armani_stronger_with_you);
+        Perfume p5 = new Perfume("Azzaro Wanted By Night", new String[]{"fall", "winter"}, new Range(35, 120), R.drawable.azzaro_wanted_by_night);
+        Perfume p6 = new Perfume("Dolce & Gabbana Light Blue Intense", new String[]{"spring", "summer"}, new Range(0, 34), R.drawable.dolce_gabbana_light_blue_intense);
+        Perfume p7 = new Perfume("Bvlgari Aqva Marine Pour Homme", new String[]{"spring", "summer"}, new Range(35, 120), R.drawable.bvlgari_aqva_marine_pour_homme);
+        Perfume p8 = new Perfume("Montblanc Legend Spirit", new String[]{"spring", "summer"}, new Range(35, 120), R.drawable.montblanc_legend_spirit);
+        Perfume p9 = new Perfume("Lacoste Blanc", new String[]{"spring", "summer"}, new Range(35, 120), R.drawable.lacoste_blanc);
+        Perfume p10 = new Perfume("Versace Pour Homme", new String[]{"spring", "summer"}, new Range(0, 34), R.drawable.versace_pour_homme);
+//        Perfume p11 = new Perfume("Anyone, Anytime & Anywhere", new String[]{"spring", "summer", "fall", "winter"}, new Range(0, 120), R.drawable);
 
         perfumes.add(p1);
         perfumes.add(p2);
@@ -148,7 +157,7 @@ public class ResultActivity extends AppCompatActivity {
         perfumes.add(p8);
         perfumes.add(p9);
         perfumes.add(p10);
-        perfumes.add(p11);
+//        perfumes.add(p11);
     }
 
     public void makeToast(String message) {

@@ -11,6 +11,7 @@ import android.util.Range;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final static String TAG = "GAMEPLAY";
 
-    private Button start_button;
+    private LinearLayout start_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

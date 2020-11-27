@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg2"
     tools:context=".QuestionActivity">
 
 
     <TextView
         android:id="@+id/question_text"
-        android:layout_width="0dp"
+        android:layout_width="361dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginTop="240dp"
         android:gravity="center"
         android:text="Here is the example for the question?"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,9 +26,7 @@
         android:id="@+id/options"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/next_question"
+        app:layout_constraintBottom_toTopOf="@+id/progress_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_text">
@@ -36,80 +35,116 @@
             android:id="@+id/answer1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Answer 1" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/btn_unclicked"
+            android:text="Answer 1"
+            android:button="@null"
+            android:paddingLeft="20dp"
+            android:textColor="#160060" />
 
         <RadioButton
             android:id="@+id/answer2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Answer 2" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/btn_unclicked"
+            android:text="Answer 2"
+            android:button="@null"
+            android:paddingLeft="20dp"
+            android:textColor="#160060" />
 
         <RadioButton
             android:id="@+id/answer3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Answer 3" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/btn_unclicked"
+            android:text="Answer 3"
+            android:button="@null"
+            android:paddingLeft="20dp"
+            android:textColor="#160060" />
 
         <RadioButton
             android:id="@+id/answer4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Answer 4" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/btn_unclicked"
+            android:text="Answer 4"
+            android:button="@null"
+            android:paddingLeft="20dp"
+            android:textColor="#160060" />
 
         <RadioButton
             android:id="@+id/answer5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Answer 5" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/btn_unclicked"
+            android:text="Answer 5"
+            android:button="@null"
+            android:paddingLeft="20dp"
+            android:textColor="#160060" />
 
         <RadioButton
             android:id="@+id/answer6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Answer 6" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/btn_unclicked"
+            android:text="Answer 6"
+            android:button="@null"
+            android:paddingLeft="20dp"
+            android:textColor="#160060" />
 
     </RadioGroup>
-
-    <Button
-        android:id="@+id/next_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="35dp"
-        android:text="Next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/previous_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginBottom="35dp"
-        android:text="Previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/progress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="19dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/previous_question"
-        app:layout_constraintEnd_toStartOf="@+id/progress_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/options" />
 
     <TextView
         android:id="@+id/progress_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="25dp"
+        android:layout_marginBottom="28dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/next_question"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/next_question"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toEndOf="@+id/previous_question" />
+
+    <ImageView
+        android:id="@+id/previous_question"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/previous" />
+
+    <ImageView
+        android:id="@+id/next_question"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/options" />
+        app:srcCompat="@drawable/next" />
+
+    <ImageView
+        android:id="@+id/back_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
