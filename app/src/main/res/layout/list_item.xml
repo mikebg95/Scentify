@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#240042">
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape">
+
+        <ImageView
+            android:id="@+id/lv_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/azzaro_wanted_by_night" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/lv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/frame_layout"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="40dp"
+        android:textSize="18sp"
+        android:textColor="#C3FCF2"
+        android:fontFamily="@font/proxima_nova"
+        android:text="Aqva Marine Pour Homme"/>
+
+    <TextView
+        android:id="@+id/lv_brand"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_toRightOf="@+id/frame_layout"
+        android:text="Bvlgari"
+        android:layout_marginStart="20dp"
+        android:textSize="18sp"
+        android:textColor="#C3FCF2"
+        android:fontFamily="@font/proxima_nova"
+        android:layout_below="@+id/lv_title"/>
+
+</RelativeLayout>

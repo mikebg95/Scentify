@@ -1,17 +1,13 @@
 package com.example.perfumefinder;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.TypedArrayUtils;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Range;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -19,9 +15,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -29,8 +22,12 @@ public class ResultActivity extends AppCompatActivity {
 
     ArrayList<Perfume> perfumes;
     public static ArrayList<Perfume> resultPerfumes;
-    ArrayList<String> perfumeNames;
-    ArrayAdapter<String> adapter;
+
+//    ArrayList<String> perfumeNames;
+//    ArrayAdapter<String> adapter;
+
+    PerfumeAdapter adapter;
+
     ListView lv;
     ImageView backHome;
 
@@ -41,47 +38,64 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        perfumes = new ArrayList<>();
-        resultPerfumes = new ArrayList<>();
-        perfumeNames = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, perfumeNames);
+        // references to views
         lv = findViewById(R.id.lv);
-        backHome = findViewById(R.id.back_home2);
+        backHome = findViewById(R.id.back_question);
 
+        // add all perfumes to list
+        perfumes = new ArrayList<>();
         addPerfumes();
+
+        // get answers from intent
+        Intent intent = getIntent();
+        answers = (HashMap<String, String>) intent.getSerializableExtra("answers");
+
+        // get perfumes from answers
+        resultPerfumes = new ArrayList<>();
+        checkPerfumes(answers);
+
+        // create custom adapter
+        adapter = new PerfumeAdapter(this, R.layout.list_item, resultPerfumes);
+
+        // set adapter to listview
+        lv.setAdapter(adapter);
+
+
+        backHome.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                backHome.setBackgroundResource(R.drawable.back_clicked);
+                if (!isInside(backHome, event)) {
+                    backHome.setBackgroundResource(R.drawable.back);
+                }
+                return false;
+            }
+        });
 
         backHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                backHome.setBackgroundResource(R.drawable.back);
                 startActivity(new Intent(getApplicationContext(), QuestionActivity.class));
             }
         });
 
-        Intent intent = getIntent();
-        answers = (HashMap<String, String>) intent.getSerializableExtra("answers");
 
-        checkPerfumes(answers);
 
-        for (int i = 0; i < resultPerfumes.size(); i++) {
-            perfumeNames.add(resultPerfumes.get(i).getName());
-        }
 
-        // TODO: make custom lv rows with image and name
-        lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String nameClicked = (String) parent.getItemAtPosition(position);
+                Perfume perfumeClicked = (Perfume) parent.getItemAtPosition(position);
+                int clickedId = perfumeClicked.getId();
 
                 Intent intent = new Intent(getApplicationContext(), PerfumeActivity.class);
-                intent.putExtra("nameClicked", nameClicked);
+                intent.putExtra("clickedId", clickedId);
                 startActivity(intent);
 
             }
         });
-
-
     }
 
     public void checkPerfumes(HashMap<String, String> answers) {
@@ -135,17 +149,16 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     public void addPerfumes() {
-        Perfume p1 = new Perfume("Viktor & Rolf Spicebomb Extreme", new String[]{"fall", "winter"}, new Range(35, 120), R.drawable.viktor_rolf_spicebomb_extreme);
-        Perfume p2 = new Perfume("Dolce & Gabbana The One EDP", new String[]{"fall", "winter"}, new Range(35, 120), R.drawable.dolce_gabbana_the_one_edp);
-        Perfume p3 = new Perfume("Calvin Klein CK Shock For Him", new String[]{"fall", "winter"}, new Range(0, 34), R.drawable.calvin_klein_ck_shock_for_him);
-        Perfume p4 = new Perfume("Emporio Armani Stronger With You", new String[]{"fall", "winter"}, new Range(0, 34), R.drawable.emporio_armani_stronger_with_you);
-        Perfume p5 = new Perfume("Azzaro Wanted By Night", new String[]{"fall", "winter"}, new Range(35, 120), R.drawable.azzaro_wanted_by_night);
-        Perfume p6 = new Perfume("Dolce & Gabbana Light Blue Intense", new String[]{"spring", "summer"}, new Range(0, 34), R.drawable.dolce_gabbana_light_blue_intense);
-        Perfume p7 = new Perfume("Bvlgari Aqva Marine Pour Homme", new String[]{"spring", "summer"}, new Range(35, 120), R.drawable.bvlgari_aqva_marine_pour_homme);
-        Perfume p8 = new Perfume("Montblanc Legend Spirit", new String[]{"spring", "summer"}, new Range(35, 120), R.drawable.montblanc_legend_spirit);
-        Perfume p9 = new Perfume("Lacoste Blanc", new String[]{"spring", "summer"}, new Range(35, 120), R.drawable.lacoste_blanc);
-        Perfume p10 = new Perfume("Versace Pour Homme", new String[]{"spring", "summer"}, new Range(0, 34), R.drawable.versace_pour_homme);
-//        Perfume p11 = new Perfume("Anyone, Anytime & Anywhere", new String[]{"spring", "summer", "fall", "winter"}, new Range(0, 120), R.drawable);
+        Perfume p1 = new Perfume(1, "Viktor & Rolf",  "Spicebomb Extreme", new String[]{"fall", "winter"}, new Range(35, 120), R.drawable.viktor_rolf_spicebomb_extreme);
+        Perfume p2 = new Perfume(2, "Dolce & Gabbana", "The One EDP", new String[]{"fall", "winter"}, new Range(35, 120), R.drawable.dolce_gabbana_the_one_edp);
+        Perfume p3 = new Perfume(3, "Calvin Klein", "Shock For Him", new String[]{"fall", "winter"}, new Range(0, 34), R.drawable.calvin_klein_ck_shock_for_him);
+        Perfume p4 = new Perfume(4, "Emporio Armani", "Stronger With You", new String[]{"fall", "winter"}, new Range(0, 34), R.drawable.emporio_armani_stronger_with_you);
+        Perfume p5 = new Perfume(5, "Azzaro", "Wanted By Night", new String[]{"fall", "winter"}, new Range(35, 120), R.drawable.azzaro_wanted_by_night);
+        Perfume p6 = new Perfume(6, "Dolce & Gabbana", "Light Blue Intense", new String[]{"spring", "summer"}, new Range(0, 34), R.drawable.dolce_gabbana_light_blue_intense);
+        Perfume p7 = new Perfume(7, "Bvlgari", "Aqva Marine Pour Homme", new String[]{"spring", "summer"}, new Range(35, 120), R.drawable.bvlgari_aqva_marine_pour_homme);
+        Perfume p8 = new Perfume(8, "Montblanc", "Legend Spirit", new String[]{"spring", "summer"}, new Range(35, 120), R.drawable.montblanc_legend_spirit);
+        Perfume p9 = new Perfume(9, "Lacoste", "Lacoste Blanc", new String[]{"spring", "summer"}, new Range(35, 120), R.drawable.lacoste_blanc);
+        Perfume p10 = new Perfume(10, "Versace", "Versace Pour Homme", new String[]{"spring", "summer"}, new Range(0, 34), R.drawable.versace_pour_homme);
 
         perfumes.add(p1);
         perfumes.add(p2);
@@ -157,10 +170,13 @@ public class ResultActivity extends AppCompatActivity {
         perfumes.add(p8);
         perfumes.add(p9);
         perfumes.add(p10);
-//        perfumes.add(p11);
     }
 
     public void makeToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean isInside(View v, MotionEvent e) {
+        return !(e.getX() < 0 || e.getY() < 0 || e.getX() > v.getMeasuredWidth() || e.getY() > v.getMeasuredHeight());
     }
 }

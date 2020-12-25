@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -67,75 +68,154 @@ public class QuestionActivity extends AppCompatActivity {
 
         bindViews(qNum); // bind views to question and answer options
 
+        backHome.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                backHome.setBackgroundResource(R.drawable.back_clicked);
+                if (!isInside(backHome, event)) {
+                    backHome.setBackgroundResource(R.drawable.back);
+                }
+                return false;
+            }
+        });
+
         backHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                backHome.setBackgroundResource(R.drawable.back);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
 
-        // change clicked button
-//        options.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                answer1.setBackgroundResource(R.drawable.answer_btn);
-//                answer2.setBackgroundResource(R.drawable.answer_btn);
-//                answer3.setBackgroundResource(R.drawable.answer_btn);
-//                answer4.setBackgroundResource(R.drawable.answer_btn);
-//                answer5.setBackgroundResource(R.drawable.answer_btn);
-//                answer6.setBackgroundResource(R.drawable.answer_btn);
-//
-//                RadioButton buttonClicked = findViewById(checkedId);
-//                buttonClicked.setBackgroundResource(R.drawable.answer_btn_clicked);
-//            }
-//
-//        });
+        answer1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                answer1.setBackgroundResource(R.drawable.btn_clicked);
+                if (!isInside(answer1, event)) {
+                    answer1.setBackgroundResource(R.drawable.btn_unclicked);
+                }
+                return false;
+            }
+        });
 
         answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearChecks();
-                answer1.setBackgroundResource(R.drawable.btn_clicked);
+                answer1.setBackgroundResource(R.drawable.btn_unclicked);
+
+                submitAnswer();
+            }
+        });
+
+        answer2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                answer2.setBackgroundResource(R.drawable.btn_clicked);
+                if (!isInside(answer2, event)) {
+                    answer2.setBackgroundResource(R.drawable.btn_unclicked);
+                }
+                return false;
             }
         });
 
         answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearChecks();
-                answer2.setBackgroundResource(R.drawable.btn_clicked);
+                answer2.setBackgroundResource(R.drawable.btn_unclicked);
+
+                submitAnswer();
+            }
+        });
+
+        answer3.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                answer3.setBackgroundResource(R.drawable.btn_clicked);
+                if (!isInside(answer3, event)) {
+                    answer3.setBackgroundResource(R.drawable.btn_unclicked);
+                }
+                return false;
             }
         });
 
         answer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearChecks();
-                answer3.setBackgroundResource(R.drawable.btn_clicked);
+                answer3.setBackgroundResource(R.drawable.btn_unclicked);
+
+                submitAnswer();
+            }
+        });
+
+        answer4.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                answer4.setBackgroundResource(R.drawable.btn_clicked);
+                if (!isInside(answer4, event)) {
+                    answer4.setBackgroundResource(R.drawable.btn_unclicked);
+                }
+                return false;
             }
         });
 
         answer4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearChecks();
-                answer4.setBackgroundResource(R.drawable.btn_clicked);
+                answer4.setBackgroundResource(R.drawable.btn_unclicked);
+
+                submitAnswer();
+            }
+        });
+
+        answer5.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                answer5.setBackgroundResource(R.drawable.btn_clicked);
+                if (!isInside(answer5, event)) {
+                    answer5.setBackgroundResource(R.drawable.btn_unclicked);
+                }
+                return false;
             }
         });
 
         answer5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearChecks();
-                answer5.setBackgroundResource(R.drawable.btn_clicked);
+                answer5.setBackgroundResource(R.drawable.btn_unclicked);
+
+                submitAnswer();
+            }
+        });
+
+
+        answer6.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                answer6.setBackgroundResource(R.drawable.btn_clicked);
+                if (!isInside(answer6, event)) {
+                    answer6.setBackgroundResource(R.drawable.btn_unclicked);
+                }
+                return false;
             }
         });
 
         answer6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearChecks();
-                answer6.setBackgroundResource(R.drawable.btn_clicked);
+                answer6.setBackgroundResource(R.drawable.btn_unclicked);
+
+                submitAnswer();
+            }
+        });
+
+        previousQuestion.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                previousQuestion.setBackgroundResource(R.drawable.previous_clicked);
+                if (!isInside(previousQuestion, event)) {
+                    previousQuestion.setBackgroundResource(R.drawable.previous);
+                }
+                return false;
             }
         });
 
@@ -143,6 +223,7 @@ public class QuestionActivity extends AppCompatActivity {
         previousQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                previousQuestion.setBackgroundResource(R.drawable.previous);
                 answers.remove(answers.get(answers.size() - 1));
                 lastQuestion = false;
                 qNum--;
@@ -150,10 +231,23 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
+        nextQuestion.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                nextQuestion.setBackgroundResource(R.drawable.next_clicked);
+                if (!isInside(nextQuestion, event)) {
+                    nextQuestion.setBackgroundResource(R.drawable.next);
+                }
+                return false;
+            }
+        });
+
         // when clicked on "next"
         nextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                nextQuestion.setBackgroundResource(R.drawable.next);
+
                 // get clicked answer
                 boolean clicked = getClickedAnswer();
 
@@ -173,6 +267,20 @@ public class QuestionActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void submitAnswer() {
+        getClickedAnswer();
+
+        if (!lastQuestion) {
+            qNum++;
+            bindViews(qNum);
+        }
+        else {
+            Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+            intent.putExtra("answers", answers);
+            startActivity(intent);
+        }
     }
 
     public boolean getClickedAnswer() {
@@ -320,5 +428,9 @@ public class QuestionActivity extends AppCompatActivity {
         answer4.setBackgroundResource(R.drawable.btn_unclicked);
         answer5.setBackgroundResource(R.drawable.btn_unclicked);
         answer6.setBackgroundResource(R.drawable.btn_unclicked);
+    }
+
+    private boolean isInside(View v, MotionEvent e) {
+        return !(e.getX() < 0 || e.getY() < 0 || e.getX() > v.getMeasuredWidth() || e.getY() > v.getMeasuredHeight());
     }
 }

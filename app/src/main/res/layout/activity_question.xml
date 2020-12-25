@@ -4,29 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg2"
+    android:padding="30dp"
+    android:background="#240042"
     tools:context=".QuestionActivity">
 
 
     <TextView
         android:id="@+id/question_text"
-        android:layout_width="361dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
-        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/proxima_nova"
+        android:gravity="start|left"
         android:text="Here is the example for the question?"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:textColor="#C3FCF2"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/line" />
 
     <RadioGroup
         android:id="@+id/options"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/progress_text"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question_text">
@@ -35,116 +39,148 @@
             android:id="@+id/answer1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:paddingBottom="6dp"
             android:background="@drawable/btn_unclicked"
-            android:text="Answer 1"
             android:button="@null"
-            android:paddingLeft="20dp"
-            android:textColor="#160060" />
+            android:paddingLeft="30dp"
+            android:text="Answer 1"
+            android:fontFamily="@font/proxima_nova"
+            android:textColor="#C3FCF2" />
 
         <RadioButton
             android:id="@+id/answer2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:paddingBottom="6dp"
             android:background="@drawable/btn_unclicked"
-            android:text="Answer 2"
             android:button="@null"
-            android:paddingLeft="20dp"
-            android:textColor="#160060" />
+            android:paddingLeft="30dp"
+            android:text="Answer 2"
+            android:fontFamily="@font/proxima_nova"
+            android:textColor="#C3FCF2" />
 
         <RadioButton
             android:id="@+id/answer3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:paddingBottom="6dp"
             android:background="@drawable/btn_unclicked"
-            android:text="Answer 3"
             android:button="@null"
-            android:paddingLeft="20dp"
-            android:textColor="#160060" />
+            android:paddingLeft="30dp"
+            android:text="Answer 3"
+            android:fontFamily="@font/proxima_nova"
+            android:textColor="#C3FCF2" />
 
         <RadioButton
             android:id="@+id/answer4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:paddingBottom="6dp"
             android:background="@drawable/btn_unclicked"
-            android:text="Answer 4"
             android:button="@null"
-            android:paddingLeft="20dp"
-            android:textColor="#160060" />
+            android:paddingLeft="30dp"
+            android:text="Answer 4"
+            android:fontFamily="@font/proxima_nova"
+            android:textColor="#C3FCF2" />
 
         <RadioButton
             android:id="@+id/answer5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:paddingBottom="6dp"
             android:background="@drawable/btn_unclicked"
-            android:text="Answer 5"
             android:button="@null"
-            android:paddingLeft="20dp"
-            android:textColor="#160060" />
+            android:paddingLeft="30dp"
+            android:text="Answer 5"
+            android:fontFamily="@font/proxima_nova"
+            android:textColor="#C3FCF2" />
 
         <RadioButton
             android:id="@+id/answer6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:paddingBottom="6dp"
             android:background="@drawable/btn_unclicked"
-            android:text="Answer 6"
             android:button="@null"
-            android:paddingLeft="20dp"
-            android:textColor="#160060" />
+            android:paddingLeft="30dp"
+            android:text="Answer 6"
+            android:fontFamily="@font/proxima_nova"
+            android:textColor="#C3FCF2" />
 
     </RadioGroup>
+
+    <ImageView
+        android:id="@+id/previous_question"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/previous" />
+
+    <ImageView
+        android:id="@+id/next_question"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="40dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/next" />
+
+    <ImageView
+        android:id="@+id/back_home"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="80dp"
+        android:layout_height="42dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_small" />
 
     <TextView
         android:id="@+id/progress_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:text="TextView"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/next_question"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toEndOf="@+id/previous_question" />
-
-    <ImageView
-        android:id="@+id/previous_question"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/proxima_nova"
+        android:text="2/10"
+        android:textColor="#C3FCF2"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/previous" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <ImageView
-        android:id="@+id/next_question"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress_text"
+        app:srcCompat="@drawable/line" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/next" />
-
-    <ImageView
-        android:id="@+id/back_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
+        app:srcCompat="@drawable/submit_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

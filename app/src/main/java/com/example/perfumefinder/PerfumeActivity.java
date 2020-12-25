@@ -31,15 +31,14 @@ public class PerfumeActivity extends AppCompatActivity {
 //            @Override
 //            public void onClick(View v) {
 //                Intent intent = new Intent();
-//                intent.
 //                startActivity(new Intent(getApplicationContext(), ResultActivity.class));
 //            }
 //        });
 
-        String nameClicked = getIntent().getStringExtra("nameClicked");
+        int clickedId = getIntent().getIntExtra("clickedId", 0);
         Perfume perfumeClicked = null;
         for (int i = 0; i < ResultActivity.resultPerfumes.size(); i++) {
-            if (ResultActivity.resultPerfumes.get(i).getName().equals(nameClicked)) {
+            if (ResultActivity.resultPerfumes.get(i).getId() == clickedId) {
                 perfumeClicked = ResultActivity.resultPerfumes.get(i);
             }
         }

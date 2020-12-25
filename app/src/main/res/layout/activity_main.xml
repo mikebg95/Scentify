@@ -4,21 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg1"
+    android:background="#240042"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <ImageView
         android:id="@+id/start_button"
         android:layout_width="209dp"
         android:layout_height="66dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="180dp"
         android:background="@drawable/start_btn"
+        android:clickable="true"
         android:fontFamily="sans-serif-medium"
         android:gravity="left|center_vertical"
-        android:clickable="true"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_home" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
