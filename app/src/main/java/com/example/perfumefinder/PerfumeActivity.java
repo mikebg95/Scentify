@@ -46,9 +46,9 @@ public class PerfumeActivity extends AppCompatActivity {
         int imageId = perfumeClicked.getImageId();
         String pName = perfumeClicked.getName();
         String[] seasonsList = perfumeClicked.getSeasons();
-        String pSeasons = "";
+        String pSeasons = "Seasons: ";
         if (seasonsList.length == 4) {
-            pSeasons = "all year round";
+            pSeasons += "all year round";
         }
         else {
             for (int i = 0; i < seasonsList.length; i++) {
@@ -59,23 +59,21 @@ public class PerfumeActivity extends AppCompatActivity {
             }
         }
         String pAgeRange = perfumeClicked.getAgeRange().toString();
-        String pAge = "";
+        String pAge = "Age range: ";
         if (pAgeRange.equals("[0, 34]")) {
-            pAge = "0-34 years old";
+            pAge += "0-34 years old";
         }
         else if (pAgeRange.equals("[35, 120]")) {
-            pAge = "35+ years old";
+            pAge += "35+ years old";
         }
         else {
-            pAge = "all ages";
+            pAge += "all ages";
         }
 
         name.setText(pName);
         season.setText(pSeasons);
         age.setText(pAge);
         img.setImageResource(imageId);
-
-
     }
 
     public void makeToast(String message) {
