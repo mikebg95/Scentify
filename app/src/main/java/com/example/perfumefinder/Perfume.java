@@ -12,27 +12,31 @@ public class Perfume implements Serializable {
     private String name;
     private String[] seasons;
     private Range ageRange;
+    private String lifestyle;
+    private String type;
     private int iconId;
     private int imageId;
 
-    public Perfume(int id, String brand, String name, String[] seasons, Range ageRange, int imageId) {
+    public Perfume(int id, String brand, String name, String[] seasons, Range ageRange, String lifestyle, String type, int imageId) {
         this.id = id;
         this.brand = brand;
         this.name = name;
         this.seasons = seasons;
         this.ageRange = ageRange;
+        this.lifestyle = lifestyle;
+        this.type = type;
         this.imageId = imageId;
     }
 
-    public Perfume(int id, String brand, String name, String[] seasons, Range ageRange, int iconId, int imageId) {
-        this.id = id;
-        this.brand = brand;
-        this.name = name;
-        this.seasons = seasons;
-        this.ageRange = ageRange;
-        this.iconId = iconId;
-        this.imageId = imageId;
-    }
+//    public Perfume(int id, String brand, String name, String[] seasons, Range ageRange, int iconId, int imageId) {
+//        this.id = id;
+//        this.brand = brand;
+//        this.name = name;
+//        this.seasons = seasons;
+//        this.ageRange = ageRange;
+//        this.iconId = iconId;
+//        this.imageId = imageId;
+//    }
 
     public Perfume(String name, String brand, int imageId) {
         this.brand = brand;
@@ -58,6 +62,14 @@ public class Perfume implements Serializable {
 
     public Range getAgeRange() {
         return ageRange;
+    }
+
+    public String getLifestyle() {
+        return lifestyle;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public int getImageId() {
