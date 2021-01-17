@@ -310,7 +310,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     public void addQuestions() {
         Question q1 = new Question("season", "For which season do you need perfume?", new String[]{"Summer", "Fall", "Winter", "Spring", "All seasons", "Doesn't matter"});
-        Question q2 = new Question("age", "For which age do you need perfume?", new String[]{"0-30 years old", "30+ years old", "All ages", "Doesn't matter"});
+        Question q2 = new Question("age", "For which age do you need perfume?", new String[]{"Under 30", "30+", "All ages", "Doesn't matter"});
         Question q3 = new Question("lifestyle", "How would you describe your lifestyle?", new String[]{"Student", "Business", "Traveler", "Athlete", "Nature", "Doesn't matter"});
         Question q4 = new Question("type", "What type of perfume are you looking for?", new String[]{"Fearless", "Sweet", "Fresh", "Doesn't matter"});
 

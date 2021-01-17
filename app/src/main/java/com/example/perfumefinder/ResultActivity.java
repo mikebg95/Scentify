@@ -92,7 +92,6 @@ public class ResultActivity extends AppCompatActivity {
                 intent.putExtra("answers", answers);
                 intent.putExtra("clickedId", clickedId);
                 startActivity(intent);
-
             }
         });
     }
@@ -108,10 +107,10 @@ public class ResultActivity extends AppCompatActivity {
         String type = answers.get("type").toLowerCase();
 
         int age;
-        if (ageString.equals("0-30 years old")) {
+        if (ageString.equals("under 30")) {
             age = 10;
         }
-        else if (ageString.equals("30+ years old")) {
+        else if (ageString.equals("30+")) {
             age = 80;
         }
         else {
@@ -134,9 +133,6 @@ public class ResultActivity extends AppCompatActivity {
             else {
                 isSeason = false;
             }
-
-            Log.d(TAG, "Perfume: " + i);
-            Log.d(TAG, ": ");
 
             // filter based on age
             if (ageRange.contains(age) || ageString.equals("doesn't matter")) {

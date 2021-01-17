@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,9 +15,11 @@ import java.util.HashMap;
 
 public class PerfumeActivity extends AppCompatActivity {
 
+    private final static String TAG = "GAMEPLAY";
+
     HashMap<String, String> answers;
 
-    TextView name, season, age, brand;
+    TextView name, season, age, brand, lifestyle, type;
     ImageView img, backHome;
 
     @Override
@@ -31,6 +34,8 @@ public class PerfumeActivity extends AppCompatActivity {
         season = findViewById(R.id.season);
         age = findViewById(R.id.age);
         brand = findViewById(R.id.brand);
+        lifestyle = findViewById(R.id.lifestyle);
+        type = findViewById(R.id.type);
 
         img = findViewById(R.id.img);
         backHome = findViewById(R.id.back_home3);
@@ -81,11 +86,11 @@ public class PerfumeActivity extends AppCompatActivity {
         }
         String pAgeRange = perfumeClicked.getAgeRange().toString();
         String pAge;
-        if (pAgeRange.equals("[0, 34]")) {
-            pAge = "0-29 years old";
+        if (pAgeRange.equals("[0, 29]")) {
+            pAge = "Under 30";
         }
-        else if (pAgeRange.equals("[35, 120]")) {
-            pAge = "30+ years old";
+        else if (pAgeRange.equals("[30, 120]")) {
+            pAge = "30+";
         }
         else {
             pAge = "All ages";
@@ -96,10 +101,19 @@ public class PerfumeActivity extends AppCompatActivity {
         // capitalize first letter of seasons string
         pSeasons = pSeasons.substring(0, 1).toUpperCase() + pSeasons.substring(1);
 
+        // get perfume lifestyle and type
+        String pLifestyle = perfumeClicked.getLifestyle();
+        String pType = perfumeClicked.getType();
+
+        // set correct information on textviews
         name.setText(pName);
         season.setText(pSeasons);
         age.setText(pAge);
         brand.setText(pBrand);
+        lifestyle.setText(pLifestyle);
+        type.setText(pType);
+
+
         img.setImageResource(imageId);
     }
 
